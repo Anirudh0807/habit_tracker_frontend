@@ -7,7 +7,7 @@ import CalendarProgress from "./CalendarProgress";
 import DaysNames from "./DaysNames";
 
 const Calendar = () => {
-  const progress = 80;
+  const progress = 65;
   const [showAddCard, setShowAddCard] = useState(false);
 
   const handleClick = () => {

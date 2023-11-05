@@ -11,18 +11,20 @@ const Activity = (props) => {
         w={40}
         h={12}
         mr={10}
-        alignItems="center"
         justify="center"
         bg="#2d3748"
       >
-        <Flex align="center">
+        <Flex align="center" direction={"row"}>
           <Image
             borderRadius="full"
             boxSize="30px" // Adjust the size of the image content
             bg="white"
             src={icon}
             ml={5}
+            alignItems={"center"}
+            justifyItems={"center"}
           />
+
           <CardBody>
             <Text color={"white"} fontWeight={"bold"}>
               {Name}
