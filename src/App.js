@@ -3,7 +3,6 @@ import React from "react";
 import { ChakraProvider } from "@chakra-ui/react";
 import Calendar from "./Calendar";
 import CurrentTasks from "./CurrentTasks";
-import AddCard from "./AddCard";
 
 const App = () => {
   return (

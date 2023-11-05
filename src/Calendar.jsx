@@ -2,9 +2,6 @@ import React, { useState } from "react";
 import { Box, Button, Progress, Stack, Text } from "@chakra-ui/react";
 import AddCard from "./AddCard";
 import HistoryProgressBar from "./HistoryProgressBar";
-import Activity from "./Activity";
-import CalendarProgress from "./CalendarProgress";
-import DaysNames from "./DaysNames";
 
 const Calendar = () => {
   const progress = 65;

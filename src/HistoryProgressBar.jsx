@@ -150,8 +150,10 @@ const HistoryProgressBar = () => {
             color="white"
             border="1px"
             borderColor="white"
+            onClick={reduceDates}
+            cursor="pointer"
           >
-            <ArrowBackIcon boxSize={4} onClick={reduceDates} />
+            <ArrowBackIcon boxSize={4} />
           </Circle>
           <Circle
             size="30px"
@@ -159,8 +161,10 @@ const HistoryProgressBar = () => {
             color="white"
             border="1px"
             borderColor="white"
+            onClick={increaseDates}
+            cursor="pointer"
           >
-            <ArrowForwardIcon boxSize={4} onClick={increaseDates} />
+            <ArrowForwardIcon boxSize={4} />
           </Circle>
         </Stack>
         <Stack direction="row" spacing={2}>

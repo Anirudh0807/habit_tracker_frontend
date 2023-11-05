@@ -19,13 +19,13 @@ const CalendarProgress = (props) => {
 
   // Define an array to represent the days of the week
   const daysOfWeek = [
+    "Sunday",
     "Monday",
     "Tuesday",
     "Wednesday",
     "Thursday",
     "Friday",
     "Saturday",
-    "Sunday",
   ];
 
   return (

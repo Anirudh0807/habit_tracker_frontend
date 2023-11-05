@@ -3,7 +3,7 @@ import React from "react";
 
 const DaysNames = (props) => {
   const {color} = props;
-  const daysForTop = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat","Sun"];
+  const daysForTop = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
   return (
     <Stack direction={"row"} alignItems="center" mt={2} maxWidth={1000}>
