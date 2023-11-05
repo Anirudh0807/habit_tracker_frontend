@@ -3,14 +3,17 @@ import {
   Button,
   Center,
   Checkbox,
+  CloseButton,
   FormControl,
   FormLabel,
   Grid,
+  Image,
   Input,
   Switch,
   Text,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
+import Pick from "./emojis/Pick.svg";
 
 const AddCard = ({ onClose }) => {
   const [name, setName] = useState("");
@@ -49,16 +52,39 @@ const AddCard = ({ onClose }) => {
   return (
     <Box bg={"#1a202c"} borderRadius="md" pr={100} pl={100} pt={10} pb={10}>
       <div>
+        <CloseButton // Close button added here
+          position="absolute"
+          right="10px"
+          top="10px"
+          onClick={onClose}
+          color={"white"}
+        />
+
         <Text color={"white"} fontSize={"3xl"} textAlign="center" m={4}>
           New Habit
         </Text>
 
-        <Text color={"white"} m={4}>Pick Emoji*</Text>
+        <Text color={"white"} m={4}>
+          Pick Emoji*
+        </Text>
+
+        <Center>
+          <Image
+            borderRadius="full"
+            boxSize="50px" // Adjust the size of the image content
+            bg="white"
+            src={Pick}
+            ml={5}
+            alignItems={"center"}
+            justifyItems={"center"}
+          />
+        </Center>
 
         <div>
           <Text color={"white"} ml={4}>
             Habit Name*
           </Text>
+
           <Input
             type="String"
             placeholder="Enter the Name"
@@ -87,16 +113,29 @@ const AddCard = ({ onClose }) => {
             ))}
           </Grid>
 
-          <Text color={"white"} mt={4}>Habit Type</Text>
+          <Text color={"white"} mt={4}>
+            Habit Type
+          </Text>
 
           <FormControl display="flex" alignItems="center">
-            <Text color={"white"} m={2}>Do</Text>
+            <Text color={"white"} m={2}>
+              Do
+            </Text>
             <Switch id="email-alerts" />
-            <Text color={"white"} m={2}>Dont</Text>
+            <Text color={"white"} m={2}>
+              Dont
+            </Text>
           </FormControl>
 
           <Box textAlign="center">
-            <Button color="#2b6cb0" colorScheme="#1a202c" border="1px" borderColor="#2b6cb0" onClick={onClose} m={2}>
+            <Button
+              color="#2b6cb0"
+              colorScheme="#1a202c"
+              border="1px"
+              borderColor="#2b6cb0"
+              onClick={onClose}
+              m={2}
+            >
               Cancel
             </Button>
 

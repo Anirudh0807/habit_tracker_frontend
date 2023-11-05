@@ -1,4 +1,4 @@
-import { Box, Circle, Divider, Stack, Text } from "@chakra-ui/react";
+import { Box, Circle, Divider, Flex, Stack, Text } from "@chakra-ui/react";
 import React, { useEffect, useState } from "react";
 import { ArrowForwardIcon, ArrowBackIcon } from "@chakra-ui/icons";
 import TaskCard from "./TaskCard";
@@ -8,77 +8,90 @@ import book from "./emojis/Book.svg";
 import alcohol from "./emojis/Beer.svg";
 
 const CurrentTasks = () => {
-  useEffect(() => {
-    getDate();
-  }, []);
   const [formattedDate, setFormattedDate] = useState("");
+  const [currentDate, setCurrentDate] = useState(new Date());
 
-  const getDate = () => {
-    const currentDate = new Date();
-    const dayOfWeek = currentDate.getDay();
-    const daysOfWeek = [
-      "Sunday",
-      "Monday",
-      "Tuesday",
-      "Wednesday",
-      "Thursday",
-      "Friday",
-      "Saturday",
-    ];
-    const currentDay = daysOfWeek[dayOfWeek];
-    const dayOfMonth = currentDate.getDate();
-    const month = currentDate.getMonth();
+  useEffect(() => {
+    updateFormattedDate(currentDate);
+  }, [currentDate]);
+
+  const getFormattedDate = (date) => {
+    const day = date.getDate();
     const monthNames = [
-      "January",
-      "February",
-      "March",
-      "April",
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
       "May",
-      "June",
-      "July",
-      "August",
-      "September",
-      "October",
-      "November",
-      "December",
+      "Jun",
+      "Jul",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec",
     ];
-    const currentMonth = monthNames[month];
-    const year = currentDate.getFullYear();
-    setFormattedDate(`${dayOfMonth} ${currentMonth} ${year}, ${currentDay}`);
+    const month = monthNames[date.getMonth()];
+    const year = date.getFullYear();
+    const dayOfWeek = date.toLocaleDateString("en-US", { weekday: "long" });
+    const suffix =
+      day === 1 ? "st" : day === 2 ? "nd" : day === 3 ? "rd" : "th";
+
+    return `${day}${suffix} ${month} ${year}, ${dayOfWeek}`;
+  };
+
+  const updateFormattedDate = (date) => {
+    const formattedDate = getFormattedDate(date);
+    setFormattedDate(formattedDate);
+  };
+
+  const increaseDate = () => {
+    const nextDate = new Date(currentDate);
+    nextDate.setDate(nextDate.getDate() + 1);
+    setCurrentDate(nextDate);
+  };
+
+  const decreaseDate = () => {
+    const previousDate = new Date(currentDate);
+    previousDate.setDate(previousDate.getDate() - 1);
+    setCurrentDate(previousDate);
   };
 
   return (
-    <Box maxWidth={400}>
-      <Stack spacing={2} direction="row">
-        <Text color={"white"} fontSize="2xl" mr={10}>
+    <Box minWidth={350}>
+      <Flex justifyContent="space-between" alignItems="center" mb={2}>
+        <Text color={"white"} fontSize="2xl">
           {formattedDate}
         </Text>
-
-        <Circle
-          size="30px"
-          bg={"#1a202c"}
-          color="white"
-          border="1px"
-          borderColor="white"
-        >
-          <ArrowBackIcon boxSize={4}/>
-        </Circle>
-        <Circle
-          size="30px"
-          bg={"#1a202c"}
-          color="white"
-          border="1px"
-          borderColor="white"
-        >
-          <ArrowForwardIcon boxSize={4}/>
-        </Circle>
-      </Stack>
+        <Stack direction="row">
+          <Circle
+            size="30px"
+            bg={"#1a202c"}
+            color="white"
+            border="1px"
+            borderColor="white"
+            onClick={decreaseDate}
+          >
+            <ArrowBackIcon boxSize={4} />
+          </Circle>
+          <Circle
+            size="30px"
+            bg={"#1a202c"}
+            color="white"
+            border="1px"
+            borderColor="white"
+            onClick={increaseDate}
+          >
+            <ArrowForwardIcon boxSize={4} />
+          </Circle>
+        </Stack>
+      </Flex>
       <Divider />
 
       <TaskCard Name={"Cycling"} icon={cycle} />
-      <TaskCard Name={"Gym"} icon={gym}/>
-      <TaskCard Name={"Book"} icon={book}/>
-      <TaskCard Name={"Alcohol"} icon={alcohol}/>
+      <TaskCard Name={"Gym"} icon={gym} />
+      <TaskCard Name={"Book"} icon={book} />
+      <TaskCard Name={"Alcohol"} icon={alcohol} />
     </Box>
   );
 };

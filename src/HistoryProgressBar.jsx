@@ -24,6 +24,7 @@ const HistoryProgressBar = () => {
   const [sat, setSat] = useState("");
   const [sun, setSun] = useState("");
   const [showCalendar, setShowCalendar] = useState(true);
+  const [shouldRerender, setShouldRerender] = useState(true);
 
   useEffect(() => {
     getLastSundayAndNextSaturday();
@@ -122,11 +123,13 @@ const HistoryProgressBar = () => {
   const reduceDates = () => {
     setSat(updateDate(sat, "-"));
     setSun(updateDate(sun, "-"));
+    setShouldRerender(!shouldRerender);
   };
 
   const increaseDates = () => {
     setSat(updateDate(sat, "+"));
     setSun(updateDate(sun, "+"));
+    setShouldRerender(!shouldRerender);
   };
 
   const handleCalendar = () => {
@@ -136,6 +139,26 @@ const HistoryProgressBar = () => {
   const handleProgress = () => {
     setShowCalendar(false);
   };
+
+  function getRandomElementsFromArray(arr, numElements) {
+    if (numElements <= 0) {
+      return [];
+    }
+  
+    const shuffledArray = arr.slice(); // Create a shallow copy of the array
+    for (let i = shuffledArray.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [shuffledArray[i], shuffledArray[j]] = [shuffledArray[j], shuffledArray[i]]; // Shuffle the array
+    }
+  
+    return shuffledArray.slice(0, numElements); // Return the first numElements
+  }
+
+  const cycleDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+  const gymDays = ["Monday", "Wednesday", "Friday"];
+  const bookDays = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+  const alcoholDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+
 
   return (
     <Box mt={10}>
@@ -200,43 +223,35 @@ const HistoryProgressBar = () => {
             <DaysNames color={"white"} />
             <CalendarProgress
               Name="Cycling"
-              Days={["Monday", "Tuesday", "Wednesday"]}
-              DaysDone={["Monday", "Tuesday"]} icon={Cycle}
+              Days={cycleDays}
+              DaysDone={getRandomElementsFromArray(cycleDays, 3)} icon={Cycle}
             />
             <CalendarProgress
               Name="Gym"
-              Days={["Monday", "Wednesday", "Friday"]}
-              DaysDone={["Monday", "Wednesday"]}
+              Days={gymDays}
+              DaysDone={getRandomElementsFromArray(gymDays, 3)}
               icon={Gym}
             />
             <CalendarProgress
               Name="Book"
-              Days={["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]}
-              DaysDone={["Monday", "Tuesday"]}
+              Days={bookDays}
+              DaysDone={getRandomElementsFromArray(bookDays, 3)}
               icon={Book}
             />
             <CalendarProgress
               Name="Alcohol"
-              Days={[
-                "Sunday",
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-              ]}
-              DaysDone={["Monday", "Tuesday", "Wednesday"]}
+              Days={alcoholDays}
+              DaysDone={getRandomElementsFromArray(alcoholDays, 3)}
               icon={Alcohol}
             />
           </>
         ) : (
           <Box>
             <DaysNames color={"#1a202c"} />
-            <Activity progress={66} Name={"Cycling"} icon={Cycle}/>
-            <Activity progress={66} Name={"Gym"} icon={Gym}/>
-            <Activity progress={40} Name={"Book"} icon={Book}/>
-            <Activity progress={42} Name={"Alcohol"} icon={Alcohol}/>
+            <Activity progress={Math.floor(Math.random() * 100) + 1} Name={"Cycling"} icon={Cycle}/>
+            <Activity progress={Math.floor(Math.random() * 100) + 1} Name={"Gym"} icon={Gym}/>
+            <Activity progress={Math.floor(Math.random() * 100) + 1} Name={"Book"} icon={Book}/>
+            <Activity progress={Math.floor(Math.random() * 100) + 1} Name={"Alcohol"} icon={Alcohol}/>
           </Box>
         )}
       </Box>
