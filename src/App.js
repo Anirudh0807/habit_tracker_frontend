@@ -1,18 +1,19 @@
 import React from "react";
 
-import { ChakraProvider } from "@chakra-ui/react";
-import Calendar from "./Calendar";
-import CurrentTasks from "./CurrentTasks";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import SignupPage from "./pages/SignupPage";
+import HomePage from "./pages/HomePage";
 
 const App = () => {
   return (
-    <ChakraProvider>
-      <div className="h-screen bg-[#1a202c] flex justify-around items-center">
-        <Calendar/>
-
-        <CurrentTasks/>
-      </div>
-    </ChakraProvider>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/signup" element={<SignupPage />} />
+        <Route path="/login" element={<LoginPage/>}/>
+      </Routes>
+    </BrowserRouter>
   );
 };
 
